@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Icon Grid with Headers</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <style>
+      .dropdown-menu.show {
+        border-radius: 28px;
+      }
+  
+      .navbar-light .navbar-nav .nav-link.active,
+      .navbar-light .navbar-nav .show>.nav-link {
+        color: rgba(37, 37, 37, 0.9);
+        background-color: rgb(255, 255, 255);
+        border-radius: 28px;
+        margin: 5px 10px 5px 10px;
+      }
+  
+      .nav-link.dropdown-toggle {
+        color: rgba(37, 37, 37, 0.9);
+        background-color: rgb(255, 255, 255);
+        border-radius: 28px;
+        margin: 5px 10px 5px 10px;
+  
+      }
+  
+      .navbar {
+        position: fixed;
+        align-items: center;
+        margin: 0 auto;
+        left: 30%;
+        right: 30%;
+        background-color: #333333;
+        top: 0px;
+        border-radius: 0 0 28px 28px;
+        z-index: 2;
+  
+      }
+  
+  
+      body {
+        background-color: rgb(240, 235, 235);
+      }
+  
+      h2 {
+        margin-top: 10px;
+      }
+  
+      .tooltip {
+        position: absolute;
+        z-index: 1;
+        background-color: #555;
+        color: #fff;
+        padding: 5px;
+        border-radius: 6px;
+        font-size: 12px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+        max-width: 300px;
+        /* Adjust this value for desired maximum width */
+        margin-bottom: 40px;
+        /* padding for the arrow */
+        padding: 20px;
+      }
+  
+      .tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        /* Position the arrow at the bottom of the tooltip */
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+        /* Adjusted to make a downward-pointing arrow */
+      }
+  
+  
+  
+      .iframe-style {
+        width: 100%;
+        height: 100%;
+  
+        border: solid 20px #333333;
+        border-radius: 2.5rem;
+        z-index: 1;
+  
+      }
+  
+      .icon {
+        width: 100px;
+        height: 100px;
+        margin: 25px auto;
+        display: block;
+      }
+  
+      .form-check {
+        margin: 20px auto;
+        cursor: pointer;
+        width: 50%;
+      }
+  
+      .form-check-input {
+        cursor: pointer;
+      }
+  
+      .btn-primary {
+        margin: 20px auto;
+        display: block;
+        border-radius: 38px;
+        width: 100px;
+      }
+  
+      .info-div {
+        text-align: center;
+        padding: 0 15px;
+      }
+  
+  
+      .iframe-style {
+        width: 100%;
+  
+        border: solid 20px #333333;
+        border-radius: 2.5rem;
+        z-index: 1;
+  
+      }
+  
+  
+      .BUTTON_RDV111 {
+        -webkit-border-radius: 2vw;
+        -moz-border-radius: 2vw;
+        border-radius: 120px;
+        font-family: Rubik, sans-serif;
+        font-size: 5vw;
+        font-weight: 100;
+        padding: 2.5vw;
+        background-color: #131212;
+        border: solid #131212 1px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin: 3% 2% 10% 2%;
+        max-width: 100%;
+        max-height: 300%;
+        color: #ffff;
+      }
+  
+      /* Container for main content */
+      #main-content {
+        transition: filter 0.3s;
+        /* Smooth transition for the blur effect */
+      }
+  
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+  
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 95%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: rgb(240, 235, 235);
+        width: 95%;
+        background-color: rgb(240, 235, 235);
+        border-radius: 38px;
+        border: 1px solid rgb(240, 235, 235);
+      }
+  
+      .close-btn {
+        color: #aaa;
+        float: right;
+        display: inline;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 20px;
+        margin-left: 96%;
+  
+      }
+  
+      .close-btn:hover,
+      .close-btn:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+  
+      }
+  
+      .service-unavailable {
+        border: 1px solid #b1aeae;
+        filter: blur(20px);
+        position: relative;
+        border-radius: 28px;
+      }
+  
+      .lock {
+        position: absolute;
+        text-align: center;
+        margin: 7% 5% 4.1% 5%;
+        width: 40px;
+      }
+  
+  
+  
+      .service-unavailable img {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+      }
+  
+  
+      .service-unavailable>* {
+        position: relative;
+        z-index: 2;
+      }
+  
+      .service-unavailable button {
+        pointer-events: none;
+        /* prevent click actions */
+        opacity: 0.5;
+        /* visually indicate it's inactive */
+        cursor: not-allowed;
+        /* show a not-allowed cursor */
+      }
+  
+      .service-unavailable input {
+        pointer-events: none;
+        /* prevent click actions */
+        opacity: 0.5;
+        /* visually indicate it's inactive */
+        cursor: not-allowed;
+        /* show a not-allowed cursor */
+      }
+  
+      .service-unavailable .form-check-input:hover {
+  
+        pointer-events: none;
+        /* prevent click actions */
+        opacity: 0.5;
+        /* visually indicate it's inactive */
+        cursor: default;
+        /* show a not-allowed cursor */
+      }
+  
+  
+  
+      .service-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 10px;
+        border-radius: 5px;
+        width: 200px;
+        text-align: center;
+        z-index: 3;
+      }
+  
+  
+      @media screen and (max-width: 420px) {
+        .img-fluid {
+          margin: 0 42% 0 42%
+        }
+  
+        .text-muted {
+          visibility: hidden;
+        }
+      }
+  
+      /* Blur effect */
+      .blur-effect {
+        filter: blur(8px);
+      }
+  
+  
+      hr {
+        margin: 50px 0 25px 0;
+      }
+  
+      .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 0.25rem 1rem;
+      clear: both;
+      font-weight: 400;
+      color: #212529;
+      text-align: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: transparent;
+      border: 0;
+      border-radius: 28px;
+  }
+  
+      
+  
+      @media screen and (max-width: 850px) {
+        .navbar {
+      position: fixed;
+      align-items: center;
+      margin: 0 auto;
+      /* left: 30%; */
+      /* right: 25%; */
+      background-color: #333333;
+      top: 0px;
+      border-radius: 0 0 28px 28px;
+      z-index: 2;
+      width: 50%;
+  
+  }
+  
+  .nav-link.dropdown-toggle {
+      color: rgba(37, 37, 37, 0.9);
+      background-color: rgb(255, 255, 255);
+      border-radius: 28px;
+      margin: 5px 10px 5px 10px;
+      padding: 5px;
+  }
+  
+    .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+      color: rgba(37, 37, 37, 0.9);
+      background-color: rgb(255, 255, 255);
+      border-radius: 28px;
+      margin: 5px 10px 5px 10px;
+      /* width: 70%; */
+      padding: 5px;
+  }
+  
+    .dropdown-menu {
+      position: absolute;
+      z-index: 1000;
+      display: none;
+      min-width: 10rem;
+      /* padding: 0.5rem 0; */
+      margin: 0;
+      font-size: 1rem;
+      color: #212529;
+      text-align: left;
+      list-style: none;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: 0.25rem;
+      
+  }
+  
+  
+        .icon {
+          width: 80px;
+          height: 80px;
+        }
+  
+        .lock {
+          position: absolute;
+          text-align: center;
+          margin: 7% 5% 4.1% 9%;
+          width: 40px;
+        }
+      }
+  
+      @media screen and (max-width: 576px) {
+        .icon {
+          width: 60px;
+          height: 60px;
+        }
+      }
+  
+      @media screen and (max-width: 500px) {
+      .navbar {
+          position: fixed;
+          align-items: center;
+          margin: 0 auto;
+          /* left: 30%; */
+          /* right: 25%; */
+          background-color: #333333;
+          top: 0px;
+          border-radius: 0 0 28px 28px;
+          z-index: 2;
+          width: 70%;
+      }
+  
+      .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+      color: rgba(37, 37, 37, 0.9);
+      background-color: rgb(255, 255, 255);
+      border-radius: 28px;
+      margin: 5px 10px 5px 10px;
+      /* width: 70%; */
+      padding: 10px;
+  }
+  
+  
+  }
+  
+    </style>
+ </head>
+ <body>
+   <div id="modal" class="modal">
+     <div class="modal-content">
+         <span class="close-btn" >&times;</span>
+         <iframe
+ src=""
+ width= "100%"
+ class= "iframe-style"
+ 
+></iframe> 
+
+</div>
+</div>
+
+<div id="main-content">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light ">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Current Price: 99.99</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Mode: 
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Value</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Agile</a></li>
+                <li><a class="dropdown-item" href="#">Default</a></li>
+                <li><a class="dropdown-item" href="#">Personalized</a></li> -->
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <!-- Web Development Section -->
+      <div class="mb-5">
+        <h2>Social Media Design</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore nihil quam facilis architecto ducimus assumenda neque quidem sequi provident libero corporis tempore quae officiis soluta ex error, debitis ab a?</p>
+        <hr />
+        <!-- Icons for Web Development -->
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\instagram.png">
+              <div class="info-div">
+                <h6 >Instagram Posts</h6>
+                <h6 class="text-black mb-0" style="display:none;">Instagram</h6>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="webDev1" />
+                <label class="form-check-label" for="webDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+  
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" style="border: none; "src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\facebook.png">
+              <div class="info-div">
+              <h6 >FaceBook Posts</h6>
+                <h6 class="text-black mb-0" style="display:none;">FaceBook</h6>
+                <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="webDev1"
+                />
+                <label class="form-check-label" for="mobileDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\twitter.png">
+              <div class="info-div">
+                <h6 >X (Twitter) Posts</h6>
+                <h6 class="text-black mb-0" style="display:none;">Twitter</h6>
+                <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="webDev1"
+                />
+                <label class="form-check-label" for="mobileDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+  
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" src="
+              C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\snapchat.png">
+              <div class="info-div">
+                <h6 >Snapchat Videos</h6>
+                <h6 class="text-black mb-0" style="display:none;">Snapchat</h6>
+                <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="webDev1"
+                />
+                <label class="form-check-label" for="mobileDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+  
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" src="
+              C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\tiktok.png">
+              <div class="info-div">
+                <h6 >Tiktok Videos</h6>
+                <h6 class="text-black mb-0" style="display:none;">Tiktok</h6>
+                <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="webDev1"
+                />
+                <label class="form-check-label" for="mobileDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+  
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+              <img class="icon" src="
+              C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\web.png">
+              <div class="info-div">
+              <div class="info-div">
+                <h6 class="text-black mb-0">Display advertising</h6>
+                <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="webDev1"
+                />
+                <label class="form-check-label" for="mobileDev1">Add On</label>
+              </div>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+      </div>
+      </div>
+
+      <!-- row 2 -->
+
+      <div class="container mt-5">
+        <!-- Web Development Section -->
+
+        
+          <div class="mb-5">
+          <h2 style="margin: 50px 0 25px 0">Copy Design</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+            nihil quam facilis architecto ducimus assumenda neque quidem sequi
+            provident libero corporis tempore quae officiis soluta ex error,
+            debitis ab a?
+          </p>
+          <hr />
+          <!-- Icons for Web Development -->
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\ads.png">
+            <div class="info-div">
+              <h6>Website Copy</h6>
+              
+              <h6 class="text-black mb-0" style="display: none">Website Copy</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\mail.png">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Email Copy</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;  border-radius: 15px;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\bullhorn.png">
+            <div class="info-div">
+              <h6>Social Media Copy</h6>
+              
+              <h6 class="text-black mb-0" style="display: none;">Social Media Copy</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\copy-writing.png">
+            <div class="info-div">
+              <h6>Print Copy</h6>
+              
+              <h6 class="text-black mb-0" style="display: none">Print</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\copy.png">
+            <div class="info-div">
+              <h6>Digital Copy</h6>
+              
+              <h6 class="text-black mb-0" style="display: none">Digital</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\storytelling.png">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Storytelling</h6>
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="container mt-5">
+        <!-- Web Development Section -->
+
+       
+          <div class="mb-5">
+          <h2 style="margin: 50px 0 25px 0">Digital Design</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+            nihil quam facilis architecto ducimus assumenda neque quidem sequi
+            provident libero corporis tempore quae officiis soluta ex error,
+            debitis ab a?
+          </p>
+          <hr />
+          <!-- Icons for Web Development -->
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\content.png">
+            <div class="info-div">
+              <h6>Website & Landing Page</h6>
+              <h6 class="text-black mb-0"  style="display: none" >Landing Page</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;" src="
+            C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\powerpoint.png.jpg
+            ">
+            <div class="info-div">
+              <h6>PowerPoint & Presentation Design</h6>
+              <h6 class="text-black mb-0" style="display: none ">PowerPoint</h6>
+              
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\infographic.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Infographic</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\xd.png">
+            <div class="info-div">
+              <h6>Logo Design</h6>
+              <h6 class="text-black mb-0"  style="display: none">Logo</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\interactivePDF.jpg">
+            <div class="info-div">
+              <h6>Interactive PDF Design</h6>
+              <h6 class="text-black mb-0"  style="display: none">PDF</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\bannerandAd.jpg">
+            <div class="info-div">
+              <h6>Banner & Ad Design for Websites</h6>
+              <h6 class="text-black mb-0"  style="display: none">Banner</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      
+
+      <div class="container mt-5">
+        <!-- Web Development Section -->
+
+       
+          <div class="mb-5">
+          <h2 style="margin: 50px 0 25px 0">Print Design</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+            nihil quam facilis architecto ducimus assumenda neque quidem sequi
+            provident libero corporis tempore quae officiis soluta ex error,
+            debitis ab a?
+          </p>
+          <hr />
+          <!-- Icons for Web Development -->
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\flyer.jpg">
+            <div class="info-div">
+              <h6>Brochure & Flyer</h6>
+              <h6 class="text-black mb-0"  style="display: none">Brochure</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\businesscard.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Business Card</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; "src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\poster.png">
+            <div class="info-div">
+              <h6>Poster & Banner</h6>
+              <h6 class="text-black mb-0"  style="display: none">Poster</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\packaging.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Packaging</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\magazine.jpg">
+            <div class="info-div">
+              <h6>Magazine & Catalog</h6>
+              <h6 class="text-black mb-0"  style="display: none">Magazine</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\letterhand.jpg">
+            <div class="info-div">
+              <h6>Letterhand & Stationary Design</h6>
+              <h6 class="text-black mb-0"  style="display: none">Letter</h6>
+              
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- row 3 -->
+
+      <div class="container mt-5">
+        <!-- Web Development Section -->
+
+       
+          <div class="mb-5">
+          <h2 style="margin: 50px 0 25px 0">Photos and Videos</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+            nihil quam facilis architecto ducimus assumenda neque quidem sequi
+            provident libero corporis tempore quae officiis soluta ex error,
+            debitis ab a?
+          </p>
+          <hr />
+          <!-- Icons for Web Development -->
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 25px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\portrait.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Portrait Photography</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\productphotography.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0" style="display: none">Photography</h6>
+              <h6>Product Photography</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\event.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Event Videography</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\videoproduction.jpg">
+            <div class="info-div">
+              <h6 class="text-black mb-0">Video Production</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\aerial.jpg">
+            <div class="info-div">
+              <h6>Aerial Photography & Videography</h6>
+              <h6 class="text-black mb-0" style="display:none">Aerial photography</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-">
+            <img class="icon" style="border: none; border-radius: 15px;"src="C:\Users\raffp\OneDrive\Documents\Company\CreativeBox\Website\shopping-cart\graphics\post-production.jpg">
+            <!-- <img class="icon" style="border: none; "src=""> -->
+            <div class="info-div">
+              <h6>Post-Production & Editing</h6>
+              <h6 class="text-black mb-0" style="display:none">Post-production</h6>
+              <!-- <br /> -->
+              <!-- <p class="text-black-p ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+                  nihil quam facilis?
+              </p> -->
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="webDev1"
+              />
+              <label class="form-check-label" for="mobileDev1">Add On</label>
+            </div>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+
+<!-- ... (the rest of the code remains unchanged) -->
+
+      </div>
+    </div>
+
+  <!--  <script>
+      
+    var divTexts = {};
+    var selectedServices = [];
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+      function runThisCode() {
+  function sanitizeMode(mode) {
+    // Define the allowed modes
+    const allowedModes = [
+      "budget",
+      "value",
+      "agile",
+      "default",
+      "personalized",
+    ];
+    // Remove any characters that are not spaces or alphanumerics and convert to lowercase
+    const sanitized = mode.replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
+    // Split by spaces and filter out any words that are not in the allowed modes
+    const filteredWords = sanitized
+      .split(" ")
+      .filter((word) => allowedModes.includes(word));
+    // Return the first allowed mode found or an empty string if none are found
+    return filteredWords.length > 0 ? filteredWords[0] : "";
+  }
+
+  function capitalizeFirstLetter(str) {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
+  function extractAndFormatModeFromElementContent(selector) {
+    // Select the element by the CSS selector provided
+    const element = document.querySelector(selector);
+    // Get the text content of the element
+    const content = element.textContent || element.innerText;
+
+    // Regular expression to find "Mode:" followed by any text
+    const modeRegex = /Mode:\s*(\S+)/;
+    const match = content.match(modeRegex);
+
+    if (match && match[1]) {
+      // Convert to lowercase and remove spaces
+      const mode = match[1].toLowerCase().replace(/\s/g, "");
+      return mode;
+    } else {
+      // If "Mode:" is not found in the content, return an empty string or handle it as needed
+      return "";
+    }
+  }
+
+  // Example usage:
+  // Assuming you want to select the element with the class "nav-link dropdown-toggle"
+  const selector = ".nav-link.dropdown-toggle";
+  const mode = extractAndFormatModeFromElementContent(selector);
+  console.log(`Mode: ${mode}`);
+
+  var modePrices = {
+    Budget: {
+      // Total to reach: 24.99, Original sum: 24.99, Scaling factor: 24.99 / 24.99 = 1
+      "Instagram": 3.12375,
+      "FaceBook":  3.12375,
+      "Twitter":  3.12375,
+      "Display Advertising":  3.12375,
+      "Email Copy":  3.12375,
+      "Copywriting":  3.12375,
+      "PowerPoint":  3.12375,
+      "Logo":  3.12375
+    },
+    Value: {
+      // Total to reach: 99.99, Original sum: 102.99, Scaling factor: 99.99 / 102.99
+      
+      "Instagram": 8.3325,
+      "FaceBook":  8.3325,
+      "Twitter":  8.3325,
+      "Copywriting":  8.3325,
+      "Display Advertising":  8.3325,
+      "Email Copy":  8.3325,
+      "Copywriting": 8.3325,
+      "PowerPoint":  8.3325,
+      "Logo":  8.3325,
+      "Landing Page":  8.3325,
+      "Banner":  8.3325,
+      "Post-production":  8.3325,
+      
+    },
+   Agile: {
+     // Total to reach: 99.99, Original sum: 102.99, Scaling factor: 99.99 / 102.99
+      
+     "Instagram":  31.249375,
+      "FaceBook":   31.249375,
+      "Twitter":   31.249375,
+      "Copywriting":  31.249375,
+      "Display Advertising":   31.249375,
+      "Email Copy":   31.249375,
+      "Copywriting":  31.249375,
+      "PowerPoint":   31.249375,
+      "Logo":   31.249375,
+      "Landing Page":   31.249375,
+      "Banner":   31.249375,
+      "Post-production":   31.249375,
+      "Storytelling":  31.249375,
+      "Brochure":  31.249375,
+      "Business Card":  31.249375,
+      "Poster":  31.249375,
+      
+    },
+    // ... (other modes) ...
+
+    // ... (any other modes if necessary) ...
+    Default: {
+      "Instagram":  41.66625,
+      "FaceBook":   41.66625,
+      "Twitter":   41.66625,
+      "Copywriting":  41.66625,
+      "Display Advertising":   41.66625,
+      "Email Copy":   41.66625,
+      "Copywriting":  41.66625,
+      "PowerPoint":   41.66625,
+      "Logo":   41.66625,
+      "Landing Page":   41.66625,
+      "Banner":   41.66625,
+      "Post-production":  41.66625,
+      "Storytelling":  41.66625,
+      "Brochure":  41.66625,
+      "Business Card":  41.66625,
+      "Poster":  41.66625,
+      "Snapchat":  41.66625,
+      "Tiktok":  41.66625,
+      "Print":  41.66625,
+      "Digital":  41.66625,
+      "PDF":  41.66625,
+      "Portrait Photography":  41.66625,
+      "Photography":  41.66625,
+      "Video Production":  41.66625,
+    },
+
+    Personalized: {
+      "Instagram": 55.5185185,
+      "FaceBook":   55.5185185,
+      "Twitter":  55.5185185,
+      "Copywriting": 55.5185185,
+      "Display Advertising":   55.5185185,
+      "Email Copy":  55.5185185,
+      "Copywriting": 55.5185185,
+      "PowerPoint":   55.5185185,
+      "Logo":  55.5185185,
+      "Landing Page":  55.5185185,
+      "Banner":  55.5185185,
+      "Post-production": 55.5185185,
+      "Storytelling":  55.5185185,
+      "Brochure":  55.5185185,
+      "Business Card":  55.5185185,
+      "Poster":  55.5185185,
+      "Snapchat": 55.5185185,
+      "Tiktok":  55.5185185,
+      "Print": 55.5185185,
+      "Digital":  55.5185185,
+      "PDF": 55.5185185,
+      "Portrait Photography":  55.5185185,
+      "Photography": 55.5185185,
+      "Video Production": 55.5185185,
+      "Packaging": 55.5185185,
+      "Magazine": 55.5185185,
+      "Letter": 55.5185185 + 0.99,
+      "Event Videography": 55.5185185,
+      "Infographic": 55.5185185,
+      "Aerial Photography": 55.5185185,
+    },
+
+    Expensive: {
+      // New total to scale towards is arbitrarily chosen for illustrative purposes
+      // Current total: 980, New total: 1200, Scaling factor: 1200 / 980
+      
+    },
+  };
+
+  function calculateTotalPrice(selectedServices, mode) {
+    const formattedMode = mode
+      .toLowerCase()
+      .replace(/\s/g, "_")
+      .split("_")
+      .map(capitalizeFirstLetter)
+      .join("_");
+
+    // Debug: Log the formattedMode to see if it matches the keys in modePrices
+    console.log("Formatted Mode:", formattedMode);
+
+    if (!modePrices[formattedMode]) {
+      console.error(`The mode "${mode}" is not available.`);
+      return "0.00"; // Return a default price or handle the error as needed
+    }
+
+    let totalPrice = 0;
+    selectedServices.forEach((service) => {
+      const formattedService = capitalizeFirstLetter(service);
+
+      // Debug: Check if the service exists for this mode
+      if (!modePrices[formattedMode][formattedService]) {
+        console.warn(
+          `The service "${formattedService}" is not available in the "${formattedMode}" mode.`
+        );
+        return; // Skip this service and continue with the next
+      }
+
+      const servicePrice = modePrices[formattedMode][formattedService];
+      totalPrice += parseFloat(servicePrice);
+    });
+
+    return totalPrice.toFixed(2);
+  }
+
+  const formattedSelectedServices = selectedServices.map((service) =>
+    capitalizeFirstLetter(service)
+  );
+  const totalPrice = calculateTotalPrice(
+    formattedSelectedServices,
+    sanitizeMode(mode)
+  );
+
+  var priceLink = document.querySelector(".nav-link.active");
+  priceLink.textContent = "Current Price: " + totalPrice;
+}
+
+
+
+      
+
+
+      // Assuming this 'modePrices' object exists and contains the pricing info
+
+
+
+      // Create a dictionary of DivNumber: Text from divisions with the specified classes
+      var divs = document.querySelectorAll('.col-lg-2, .col-md-3, .col-sm-4, .col-6');
+      divs.forEach((div, index) => {
+        var titleDiv = div.querySelector('.info-div h6.text-black.mb-0');
+        if (titleDiv) {
+          divTexts[index] = titleDiv.innerText.trim();
+        }
+      });
+      console.log("Div Texts Dictionary:", divTexts);
+
+      // Assuming mode is passed as a query parameter
+      function getInitialMode() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('mode') || 'value'; // default to 'budget' if no mode is specified
+      }
+
+      var initialMode = getInitialMode();
+
+      var dropdownLabel = document.querySelector('#navbarDropdownMenuLink');
+      dropdownLabel.textContent = 'Mode: ' + capitalizeFirstLetter(initialMode);
+
+
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
+      // Set the initial page state
+      resetServices();
+      transformServicesToMode(initialMode);
+      updateSelectedServices();
+      runThisCode()
+
+
+
+      function addTooltip(element, message) {
+        // Create the tooltip element
+        const tooltip = document.createElement("div");
+        tooltip.className = "tooltip";
+        tooltip.innerText = message;
+        document.body.appendChild(tooltip);
+
+        // Position the tooltip above the element
+        element.addEventListener("mouseover", function (e) {
+          const rect = element.getBoundingClientRect();
+          tooltip.style.top = rect.top + window.scrollY - tooltip.offsetHeight +
+            "px"; // Removed the -8px offset
+          tooltip.style.left = rect.left + window.scrollX + (rect.width / 2) - (tooltip.offsetWidth / 2) +
+            "px";
+          tooltip.style.visibility = "visible";
+          tooltip.style.opacity = 1;
+        });
+
+        element.addEventListener("mouseout", function () {
+          tooltip.style.visibility = "hidden";
+          tooltip.style.opacity = 0;
+        });
+      }
+
+
+
+  
+
+  
+  // To use the function:
+  
+
+
+
+
+  function transformServicesToMode(mode) {
+  // Mode lists
+  var budgetMode = [0, 1, 2, 5, 7 , 8, 13, 15];
+  var valueMode = [0, 1, 2, 5, 6, 7 , 8, 12, 13, 15, 17, 19, 29];
+  var AgileMode = [0, 1, 2, 5,6, 7 , 8, 11, 12, 13, 15, 17, 18,  19, 20,   29];
+  var DefaultMode = [0, 1, 2, 3, 4, 5,6, 7 , 8, 9, 10, 11, 12, 13, 15, 16, 17, 18,  19, 20, 24, 25, 27,   29]
+  var PersonlizedMode = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29
+  ];
+  var ExpensiveMode = [14, 26, 28];
+
+  // Determine the active mode
+  var activeMode;
+  switch (mode) {
+    case 'budget':
+      activeMode = budgetMode;
+      break;
+    case 'value':
+      activeMode = valueMode;
+      break;
+    case 'agile':
+      activeMode = AgileMode;
+      break;
+    case 'default':
+      activeMode = DefaultMode;
+      break;
+    case 'personalized':
+      activeMode = PersonlizedMode;
+      break;
+    default:
+      console.error("Invalid mode provided");
+      return;
+  }
+
+  // Get all service divisions
+  var serviceDivs = document.querySelectorAll(".col-lg-2.col-md-3.col-sm-4.col-6.mb-");
+  serviceDivs.forEach((div, index) => {
+    const checkbox = div.querySelector(".form-check-input");
+    const label = div.querySelector(".form-check-label");
+
+    // For personalized mode, we delegate to a specific function
+    if (mode === 'personalized') {
+      UselectExpensiveMode(ExpensiveMode);
+    } else {
+      if (activeMode.includes(index)) {
+        checkbox.checked = true; // Check the checkbox by default
+        addTooltip(div,
+          "This service is included in your chosen plan. Uncheck the box to remove it and reduce your monthly cost"
+        );
+      } else {
+        div.classList.add("mb-4");
+
+        // Create the lock image
+        var lockImg = document.createElement("img");
+        lockImg.className = "lock";
+        lockImg.src = "graphics/padlock.png";
+
+        // Append the lock image to the div
+        div.insertBefore(lockImg, div.firstChild);
+
+        var serviceContent = document.createElement("div");
+        serviceContent.className = "service-unavailable";
+        while (div.children.length > 1) {
+          serviceContent.appendChild(div.children[1]);
+        }
+        div.appendChild(serviceContent);
+
+        // Now add the tooltip to the .service-unavailable div
+        addTooltip(serviceContent,
+          "This service isn't available in your selected mode. Choose a different mode to access it.");
+      }
+    }
+  });
+
+  // This function must be defined elsewhere in your code
+  updateSelectedServices();
+  runThisCode()
+}
+
+// Make sure this function is only called once per mode switch
+function UselectExpensiveMode(ExpensiveMode) {
+  var serviceDivs = document.querySelectorAll(".col-lg-2.col-md-3.col-sm-4.col-6.mb-");
+  serviceDivs.forEach((div, index) => {
+    const checkbox = div.querySelector(".form-check-input");
+    const label = div.querySelector(".form-check-label");
+
+    if (!ExpensiveMode.includes(index)) { // Changed logic here
+      checkbox.checked = true; // Check the checkbox
+      addTooltip(div, "This service is included in your chosen plan.");
+    } else {
+      checkbox.checked = false; // Uncheck the checkbox
+      addTooltip(div, "This premium service is not included by default. By adding it your price will be increased.");
+    }
+  });
+}
+
+
+      function updateSelectedServices() {
+        selectedServices = []; // Reset the selectedServices array
+
+        var checkboxes = document.querySelectorAll(".form-check-input");
+        checkboxes.forEach((checkbox, index) => {
+          var serviceName = divTexts[index];
+          if (checkbox.checked) {
+            selectedServices.push(serviceName);
+          }
+        });
+        console.log("Updated Selected Services: ", selectedServices);
+      }
+
+
+
+
+
+
+
+
+      // Create a dictionary for the "Learn More" buttons with their respective numbers
+      var learnMoreButtons = document.querySelectorAll("button.btn.btn-primary");
+      var buttonNumbers = {};
+      learnMoreButtons.forEach((button, index) => {
+        buttonNumbers[index] = button;
+      });
+      console.log("Button Numbers Dictionary:", buttonNumbers);
+
+
+      function trackSelectedServices() {
+        var checkboxes = document.querySelectorAll(".form-check-input");
+
+        checkboxes.forEach(function (checkbox, index) {
+          checkbox.addEventListener("change", function () {
+            var serviceName = divTexts[index];
+
+            if (checkbox.checked) {
+              // Add the service to the list if checked
+              selectedServices.push(serviceName);
+              runThisCode()
+            } else {
+              // Remove the service from the list if unchecked
+              var serviceIndex = selectedServices.indexOf(serviceName);
+              if (serviceIndex > -1) {
+                selectedServices.splice(serviceIndex, 1);
+                runThisCode()
+              }
+            }
+
+            console.log("Selected Services: ", selectedServices);
+          });
+        });
+      }
+
+      trackSelectedServices();
+
+
+      // Add event listeners to the "Learn More" buttons
+      learnMoreButtons.forEach((button, index) => {
+        button.addEventListener("click", function () {
+          // Match the button's number with the div number to extract the corresponding title
+          var titleText = divTexts[index];
+          console.log("Clicked Button Index:", index, "Title Text:", titleText);
+
+          // var baseSearchURL = "http://www.google.com/custom?q=";
+          // var googleSearchURL = baseSearchURL + encodeURIComponent("What is a " + titleText + "?") + "&btnG=Search";
+
+          // var baseCSEURL = "https://www.google.com/cse?cx=b018f681b1c654a68&q=";
+          // var googleCSEURL = baseCSEURL + encodeURIComponent("What is a " + titleText + "?");
+          // console.log("Constructed Google CSE URL:", googleCSEURL);
+
+          // Construct the Wikipedia URL using the extracted title
+          var wikipediaURL = "https://en.wikipedia.org/wiki/" + encodeURIComponent(titleText);
+          console.log("Constructed Wikipedia URL:", wikipediaURL);
+
+          // Find the associated modal (assuming there's a single modal for all buttons)
+          var modal = document.getElementById("modal");
+          if (modal) {
+            // Find the iframe within the modal
+            var iframe = modal.querySelector('.iframe-style');
+            if (iframe) {
+              // Update the iframe's src attribute
+              iframe.src = wikipediaURL;
+              console.log("Iframe src updated:", wikipediaURL);
+            }
+
+            // Show the modal
+            modal.style.display = "block";
+            console.log("Modal displayed");
+
+            // Apply the blur effect to the main content
+            document.getElementById("main-content").classList.add("blur-effect");
+            document.body.style.overflow = "hidden";
+            hideCursorClasses();
+            console.log("Blur effect applied and cursor classes hidden");
+
+          }
+        });
+      });
+
+
+
+      document.querySelector(".close-btn").addEventListener("click", function () {
+        // Hide the modal
+        document.getElementById("modal").style.display = "none";
+        // Remove the blur effect from the main content
+        document.getElementById("main-content").classList.remove("blur-effect");
+        document.body.style.overflow = "auto";
+        showCursorClasses();
+      });
+
+      function resetServices() {
+        // Remove all tooltips
+        var tooltips = document.querySelectorAll('.tooltip');
+        tooltips.forEach(function (tooltip) {
+          tooltip.remove();
+        });
+
+        // Reset all service divisions
+        var serviceDivs = document.querySelectorAll(".col-lg-2.col-md-3.col-sm-4.col-6.mb-");
+        serviceDivs.forEach((div) => {
+          // Remove the lock images
+          var lockImg = div.querySelector('.lock');
+          if (lockImg) {
+            lockImg.remove();
+          }
+
+          // Remove the service-unavailable class and its contents
+          var serviceContent = div.querySelector('.service-unavailable');
+          if (serviceContent) {
+            while (serviceContent.firstChild) {
+              div.insertBefore(serviceContent.firstChild, serviceContent);
+            }
+            serviceContent.remove();
+          }
+
+          div.classList.remove("mb-4");
+
+          // Uncheck all checkboxes
+          const checkbox = div.querySelector(".form-check-input");
+          checkbox.checked = false;
+        });
+      }
+
+
+
+
+      var dropdownItems = document.querySelectorAll('.dropdown-item');
+      for (var i = 0; i < dropdownItems.length; i++) {
+        dropdownItems[i].addEventListener('click', function (event) {
+          updateModeAndPrice(event.target.textContent.trim());
+        });
+      }
+
+      function getInitialMode() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('mode') || 'budget'; // default to 'budget' if no mode is specified
+      }
+
+      var initialMode = getInitialMode();
+
+
+      function updateModeAndPrice(selectedMode) {
+        // Update Dropdown Label
+        var dropdownLabel = document.querySelector('#navbarDropdownMenuLink');
+        dropdownLabel.textContent = 'Mode: ' + selectedMode;
+
+        // Update Price
+        var price;
+        switch (selectedMode.toLowerCase()) {
+          case 'budget':
+            price = '24.99';
+            break;
+          case 'value':
+            price = '99.99';
+            break;
+          case 'agile':
+            price = '499.99';
+            break;
+          case 'default':
+            price = '999.99';
+            break;
+          case 'personalized':
+            price = '1499.99';
+            break;
+          default:
+            price = '0.00';
+        }
+        var priceLink = document.querySelector('.nav-link.active');
+        runThisCode()
+
+        // Update Dropdown Items
+        var modes = ['Budget', 'Value', 'Agile', 'Default', 'Personalized'];
+
+
+        modes.splice(modes.indexOf(selectedMode), 1); // Remove the selected mode
+
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+        dropdownMenu.innerHTML = ''; // Clear the dropdown
+        for (var i = 0; i < modes.length; i++) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.textContent = modes[i];
+          a.classList.add('dropdown-item');
+          a.href = '#';
+          a.addEventListener('click', function (event) {
+            updateModeAndPrice(event.target.textContent.trim());
+          });
+          li.appendChild(a);
+          dropdownMenu.appendChild(li);
+        }
+
+        // Call resetServices before transforming to the new mode
+        resetServices();
+        transformServicesToMode(selectedMode.toLowerCase());
+
+      }
+
+
+
+
+
+      // Logic for modal (#2)
+      if (iframe) {
+        if (width > 1900) {
+          iframe.style.width = "85vw";
+          iframe.style.height = "75vh";
+          iframe.style.display = "block";
+          modalContent.style.width = "90%";
+
+
+        } else if (width <= 920) {
+          iframe.style.width = "80vw"; // 100% of the viewport width
+          iframe.style.height = "75vh"; // 90% of the viewport height (you can adjust this value as needed)
+          iframe.style.display = "block";
+          modalContent.style.width = "90%";
+        } else if (width >= 920) {
+          var heightValueModal = width * 0.675; // 37.5% of the width
+          console.log("67.5% of width:", heightValueModal);
+
+          var newHeightModal = width - heightValueModal;
+          console.log("New height:", newHeightModal);
+
+          iframe.style.height = newHeightModal + "px"; // Assigning with units
+        } else {
+          console.log("iframe not found");
+        }
+      }
+
+
+
+
+
+      // Call the function immediately
+      adjustHrWidth();
+
+      // Adjust the width of the hr elements when the screen size changes
+      window.addEventListener("resize", adjustHrWidth);
+
+
+    });
+          </script> -->
+
+          <script src="main.js"></script>
+  </body>
+  
+</html>
+

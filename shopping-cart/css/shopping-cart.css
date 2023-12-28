@@ -251,6 +251,70 @@ a.btn {
   background: #d3d3d3;
   line-height: 40px;
 }
+#modal,
+#modal-doc,
+#modal-doc2,
+#modal-doc3,
+#modal-doc4,
+#modal-doc5,
+#modal-doc6,
+#modal-doc7 {
+  cursor: default;
+}
+
+/* cursor */
+
+.cursor {
+  position: fixed;
+  z-index: 1000000;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    height 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    height 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.cursor-content-wrap {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.cursor-content {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #989898;
+  opacity: 0.5;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    height 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    height 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.cursor-highlight {
+  position: fixed;
+  z-index: 1001;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0;
+  -webkit-transform: translate3d(-50%, -50%, 1px);
+  transform: translate3d(-50%, -50%, 1px);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
 
 /*=============
 Aesthetics 
@@ -271,4 +335,115 @@ Aesthetics
 .form-control {
   height: 100%;
   width: 10%;
+}
+
+/* modal */
+
+.iframe-style {
+  width: 100%;
+
+  border: solid 20px #333333;
+  border-radius: 2.5rem;
+  z-index: 1;
+}
+
+.BUTTON_RDV111 {
+  -webkit-border-radius: 2vw;
+  -moz-border-radius: 2vw;
+  border-radius: 120px;
+  font-family: Rubik, sans-serif;
+  font-size: 5vw;
+  font-weight: 100;
+  padding: 2.5vw;
+  background-color: #131212;
+  border: solid #131212 1px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin: 3% 2% 10% 2%;
+  max-width: 100%;
+  max-height: 300%;
+  color: #ffff;
+}
+/* Container for main content */
+#main-content {
+  transition: filter 0.3s; /* Smooth transition for the blur effect */
+}
+.modal-doc,
+.modal-doc2,
+.modal-doc3,
+.modal-doc4 {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-doc-content,
+.modal-doc2-content,
+.modal-doc3-content,
+.modal-doc4-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgb(240, 235, 235);
+  width: 50%;
+  background-color: rgb(240, 235, 235);
+  border-radius: 38px;
+  border: 1px solid rgb(240, 235, 235);
+}
+
+.close-btn-doc,
+.close-btn-doc2,
+.close-btn-doc3,
+.close-btn-doc4 {
+  color: #aaa;
+  float: right;
+  display: inline;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 20px;
+  margin-left: 96%;
+}
+
+/* Change the background color and text color of selected text */
+::selection {
+  background-color: rgb(175, 175, 175);
+  color: black;
+}
+
+.close-btn-doc:hover,
+.close-btn-doc2:hover,
+.close-btn-doc3:hover,
+.close-btn-doc4:hover,
+.close-btn-doc:focus,
+.close-btn-doc2:focus,
+.close-btn-doc3:focus,
+.close-btn-doc4:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Blur effect */
+.blur-effect {
+  filter: blur(8px);
+}
+
+@media screen and (max-width: 420px) {
+  .img-fluid {
+    margin: 0 42% 0 42%;
+  }
+
+  .text-muted {
+    visibility: hidden;
+  }
 }

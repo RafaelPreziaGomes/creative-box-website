@@ -1,0 +1,84 @@
+{
+  "Budget": {
+    "Conversion Funnel": 10.0,
+    "Newsletter": 5.0,
+    "Email Marketing": 6.0,
+    "Marketing Automation": 3.99
+  },
+
+  "Value": {
+    "Website": 35.0,
+    "Blog": 15.0,
+    "Conversion Funnel": 20.0,
+    "Newsletter": 10.0,
+    "Email Marketing": 12.0,
+    "Marketing Automation": 7.99
+  },
+
+  "Agile": {
+    "Ecommerce": 108.04,
+    "Website": 70.01,
+    "Web Application": 78.48,
+    "System Integration": 52.38,
+    "Blog": 20.95,
+    "Progressive Web App": 31.58,
+    "Conversion Funnel": 42.63,
+    "Newsletter": 16.07,
+    "Email Marketing": 26.75,
+    "Marketing Automation": 21.4,
+    "Conversion Rate Optimization": 21.4,
+    "Subscriber": 10.7
+  },
+  "Default": {
+    "Ecommerce": 269.93,
+    "Website": 179.03,
+    "Web Application": 142.67,
+    "System Integration": 160.86,
+    "Blog": 42.67,
+    "Android App": 51.77,
+    "iPhone App": 60.86,
+    "Cross-platform Software": 88.13,
+    "Progressive Web App": 69.95,
+    "Microsoft Windows Software": 60.86,
+    "MacOS Software": 51.77,
+    "Command-line Interface": 33.58,
+    "Conversion Funnel": 51.77,
+    "Newsletter": 24.49,
+    "Email Marketing": 51.77,
+    "Marketing Automation": 33.58,
+    "Conversion Rate Optimization": 42.67,
+    "Subscriber": 15.4,
+    "API": 50.0
+  },
+  "Expensive Services": {
+    "Mobile Game": 180.0,
+    "Augmented Reality": 180.0,
+    "Machine Learning": 180.0,
+    "Generative AI Implementation": 150.0,
+    "Deep Learning": 100.0,
+    "Natural Language Processing": 100.0,
+    "Data Science": 90.0
+  },
+
+  "Personalized Services": {
+    "Ecommerce": 269.93,
+    "Website": 179.03,
+    "Web Application": 142.67,
+    "System Integration": 160.86,
+    "Blog": 42.67,
+    "Android App": 51.77,
+    "iPhone App": 60.86,
+    "Cross-platform Software": 88.13,
+    "Progressive Web App": 69.95,
+    "Microsoft Windows Software": 60.86,
+    "MacOS Software": 51.77,
+    "Command-line Interface": 33.58,
+    "Conversion Funnel": 51.77,
+    "Newsletter": 24.49,
+    "Email Marketing": 51.77,
+    "Marketing Automation": 33.58,
+    "Conversion Rate Optimization": 42.67,
+    "Subscriber": 15.4,
+    "API": 50.0
+  }
+}

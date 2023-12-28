@@ -6519,7 +6519,7 @@
   .hand-img {
     max-width: 300%;
     position: absolute;
-    right: 35px;
+    right: 10px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -6536,24 +6536,7 @@
 
   }
 
-  @media screen and (max-width: 1900px) {
-    .hand-img { display:none}
-
-    .hand-img2 { display:none}
-
-    .scroll-down {
-      display:none;
-
-  }
-
-}
-
-  @media screen and (min-width: 2000px) {
-    .hand-img { display:none}
-
-    .hand-img2 { display:none}
-    
-  }
+ 
 </style>
 
 <script>
@@ -6810,6 +6793,7 @@ button.addEventListener('mouseleave', function(event) {
             </div>
           </div>
         </div>
+        
         <a
           href="#Intro"
           style="
@@ -6824,10 +6808,7 @@ button.addEventListener('mouseleave', function(event) {
             opacity: 0;
           "
           class="scroll-down bottom w-inline-block"
-        >
-
-        
-          <div class="scroll-down-box">
+        >    <div class="scroll-down-box">
             <img
               src="images/Scroll_1Scroll.png"
               loading="lazy"
@@ -7238,7 +7219,18 @@ console.log("Screen width:", width);
 
 var iframe = document.querySelector(".iframe-style");
 
-if (width >= 920 && iframe) {
+if (width >= 920 && width <= 1600) {
+    var heightValue = width * 0.375;  // 37.5% of the width
+    console.log("37.5% of width:", heightValue);
+
+    var newHeight = width - heightValue;
+    console.log("New height:", newHeight);
+
+    iframe.style.height = newHeight + "px";  // Assigning with units
+    document.querySelector(".hand-img").style.display = "none"
+  document.querySelector(".hand-img2").style.display = "none"
+
+} else if (width >= 1600)  {
     var heightValue = width * 0.375;  // 37.5% of the width
     console.log("37.5% of width:", heightValue);
 
@@ -7250,7 +7242,8 @@ if (width >= 920 && iframe) {
   var btn = document.querySelector(".BUTTON_RDV111")
   btn.style.display = "inline-block"
   iframe.style.display = "none"
-
+  document.querySelector(".hand-img").style.display = "none"
+  document.querySelector(".hand-img2").style.display = "none"
 }
  else {
     console.log("iframe not found");

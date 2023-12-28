@@ -1,5 +1,11 @@
 /* work section css */
 
+@media (max-width: 768px) {
+  .scroll-down.w-inline-block {
+    display: none;
+  }
+}
+
 /* / */
 
 .get-started-section {
@@ -97,7 +103,6 @@
   -moz-border-radius: 2vw;
   border-radius: 120px;
   font-family: Rubik, sans-serif;
-  font-size: 5vw;
   font-weight: 100;
   padding: 2.5vw;
   background-color: #131212;
