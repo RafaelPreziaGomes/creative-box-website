@@ -4,9 +4,19 @@
   .scroll-down.w-inline-block {
     display: none;
   }
+
+  .get-started-button {
+    margin-left: 20%;
+  }
+}
+
+.get-started-button {
+  margin-left: 45%;
 }
 
 /* / */
+@media (max-width: 1668px) {
+}
 
 .get-started-section {
   margin: 0 5% 5% 5%;
